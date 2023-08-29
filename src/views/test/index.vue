@@ -44,6 +44,13 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <el-row>
+        <el-col :span="9">
+          <el-form-item label="下拉选择" prop="phone">
+            <auto-complete-list-demo :all-infos="dataList"/>
+          </el-form-item>
+        </el-col>
+      </el-row>
       <el-row justify="end" type="flex">
         <el-form-item>
           <el-button icon="el-icon-search" size="mini" type="primary" @click="handleQuery">搜索</el-button>
@@ -65,10 +72,17 @@
 
 <script>
 
+import AutoCompleteListDemo from "../../components/AutoCompleteListDemo/index.vue";
+
 export default {
   name: "test",
+  components: {AutoCompleteListDemo},
   data() {
     return {
+      dataList: [{value: "1", label: "北京"},
+        {value: "2", label: "上海"},
+        {value: "3", label: "广州"},
+        {value: "4", label: "深圳"}],
       currentOption: "1",
       optionData: [
         {value: "1", label: "北京"},
