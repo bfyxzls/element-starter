@@ -45,9 +45,25 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="9">
+        <el-col :span="5">
           <el-form-item label="下拉选择" prop="phone">
             <auto-complete-list-demo :all-infos="dataList"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="5" >
+          <el-form-item label="更新日期" prop="phone">
+            <el-date-picker v-model="queryParams.updateTime"
+                            type="daterange"
+                            range-separator="至"
+                            start-placeholder="开始日期"
+                            end-placeholder="结束日期"
+                            align="right"
+                            value-format="yyyy-MM-dd"
+                            format="yyyy-MM-dd"
+                            :picker-options="pickerOptions"
+                            clearable>
+
+            </el-date-picker>
           </el-form-item>
         </el-col>
       </el-row>
@@ -79,6 +95,12 @@ export default {
   components: {AutoCompleteListDemo},
   data() {
     return {
+      pickerOptions: {
+        // 使用 disabledDate 方法来限制选择的日期不能大于当前日期
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
       dataList: [{value: "1", label: "北京"},
         {value: "2", label: "上海"},
         {value: "3", label: "广州"},
@@ -93,7 +115,8 @@ export default {
         name: "",
         email: "",
         certNumber: "",
-        phone: ""
+        phone: "",
+        updateTime: []
       },
       msgData: "Welcome to Your Vue.js App",
 
