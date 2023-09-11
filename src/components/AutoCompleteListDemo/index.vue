@@ -1,6 +1,6 @@
 <!-- 文本框自动补完功能 -->
 <template>
-  <div>
+  <div style="border:1px solid #ff0000">
     <el-autocomplete
       v-model="dataValue"
       :fetch-suggestions="fetchSuggestions"
@@ -8,6 +8,7 @@
     >
       <template slot-scope="{ item }">{{ item.label }}</template>
     </el-autocomplete>
+    <h1>子组件的值:{{subValue}}</h1>
   </div>
 </template>
 
@@ -17,7 +18,10 @@ export default {
   //allInfos是父组件传来的值，如果allInfos不是父组件传来的就不用这样写
   props: ["allInfos"],
   data() {
-    return {dataValue: null}
+    return {
+      dataValue: null,
+      subValue: 1,
+    }
   },
   methods: {
     fetchSuggestions(queryString, cb) {

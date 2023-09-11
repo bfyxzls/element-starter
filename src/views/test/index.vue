@@ -45,12 +45,12 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="5">
-          <el-form-item label="下拉选择" prop="phone">
-            <auto-complete-list-demo :all-infos="dataList"/>
+        <el-col :span="10">
+          <el-form-item label="auto-complete-list-demo组件下拉选择" prop="phone" label-width="200px">
+            <auto-complete-list-demo ref="subData" :all-infos="dataList"/>
           </el-form-item>
         </el-col>
-        <el-col :span="5" >
+        <el-col :span="14">
           <el-form-item label="更新日期" prop="phone">
             <el-date-picker v-model="queryParams.updateTime"
                             type="daterange"
@@ -124,7 +124,8 @@ export default {
   },
   methods: {
     handleQuery() {
-      this.$model.alert("检索");
+      this.$alert("检索");
+      this.$refs.subData.subValue = 3; //修改子组件中的data下面subData属性的值
     },
     resetQuery() {
       this.$refs.queryForm.resetFields();
