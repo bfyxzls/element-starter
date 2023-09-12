@@ -83,7 +83,14 @@
       ></el-option>
     </el-select>
     <hello-tag :options="optionData" :value="currentOption" :msg="msgData"></hello-tag>
+
+    <div>
+      <el-button @click="increment">+</el-button>
+      vuex状态变更：
+      <el-input v-model="count1" placeholder="请输入姓名"></el-input>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -122,6 +129,11 @@ export default {
 
     }
   },
+  computed: {
+    count1() {
+      return this.$store.state.count;
+    }
+  },
   methods: {
     handleQuery() {
       this.$alert("检索");
@@ -130,8 +142,19 @@ export default {
     resetQuery() {
       this.$refs.queryForm.resetFields();
       this.$emit("query", this.queryParams);
-    }
+    },
+    increment() {
+      this.$cache.local.set("author", "lind"); // 本地存储
+      this.$cache.session.set("huihua", "会话"); // 会话存储
+      this.$cookie.set("test","测试");// cookie存储
+      this.$store.dispatch("changeSetting", {
+        key: 'count',
+        value: 10
+      });
+      console.log(this.$store.state.count);
+    },
 
-  }
+  },
+
 }
 </script>
